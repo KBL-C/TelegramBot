@@ -113,7 +113,7 @@ public class Kblc_bot extends TelegramLongPollingBot{
                             e.printStackTrace();
                         }
                         /////////////////////////////////////
-            }else if (message_text.equals("/markup")) {
+            }else if (message_text.equals("/markup") || message_text.equals("return")) {
                 SendMessage message = new SendMessage(); // Create a message object object
                 message.setChatId(Long.toString(chat_id));
                 message.setText("Here is your keyboard");
@@ -124,17 +124,17 @@ public class Kblc_bot extends TelegramLongPollingBot{
                 // Create a keyboard row
                 KeyboardRow row = new KeyboardRow();
                 // Set each button, you can also use KeyboardButton objects if you need something else than text
-                row.add("Row 1 Button 1");
-                row.add("Row 1 Button 2");
-                row.add("Row 1 Button 3");
+                row.add("defaul image");
+                row.add("open google");
+                row.add("change keyboard");
                 // Add the first row to the keyboard
                 keyboard.add(row);
                 // Create another keyboard row
                 row = new KeyboardRow();
                 // Set each button for the second line
-                row.add("Row 2 Button 1");
-                row.add("Row 2 Button 2");
-                row.add("Row 2 Button 3");
+                row.add("number emoji");
+                row.add("money emoji");
+                row.add("smile emoji");
                 // Add the second row to the keyboard
                 keyboard.add(row);
                 // Set the keyboard to the markup
@@ -146,7 +146,7 @@ public class Kblc_bot extends TelegramLongPollingBot{
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-        }else if (message_text.equals("Row 1 Button 1")) {
+        }else if (message_text.equals("defaul image")) {
             SendPhoto msg = new SendPhoto();
             msg.setChatId(Long.toString(chat_id));
             msg.setPhoto(new InputFile("AgACAgQAAxkBAAMJYAmoKlHct5sgLGEBd89HFbKWE7wAAsO0MRtXwVBQFSbO7WORtxqugyAnXQADAQADAgADeQADNWkEAAEeBA"));
@@ -156,10 +156,10 @@ public class Kblc_bot extends TelegramLongPollingBot{
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        }else if (message_text.equals("Row 1 Button 2")) {
+        }else if (message_text.equals("open google")) {
             SendMessage msg = new SendMessage();
             //String answear;
-            String answer = EmojiParser.parseToUnicode("Here is a smile emoji: :smile:\n\n Here is alien emoji: :alien:");
+            String answer = "https://www.google.com/";
             msg.setChatId(Long.toString(chat_id));
             msg.setText(answer);
             try {
@@ -167,7 +167,7 @@ public class Kblc_bot extends TelegramLongPollingBot{
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        }else if (message_text.equals("Row 1 Button 3")) {
+        }else if (message_text.equals("change keyboard")) {
             SendMessage message = new SendMessage(); // Create a message object object
                 message.setChatId(Long.toString(chat_id));
                 message.setText("Here is your limited keyboard");
@@ -178,6 +178,7 @@ public class Kblc_bot extends TelegramLongPollingBot{
                 // Create a keyboard row
                 KeyboardRow row = new KeyboardRow();
                 // Set each button, you can also use KeyboardButton objects if you need something else than text
+                row.add("return");
                 row.add("0");
                 row.add("1");
                 row.add("2");
@@ -212,37 +213,36 @@ public class Kblc_bot extends TelegramLongPollingBot{
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-        }else if (message_text.equals("Row 2 Button 1")) {
-            SendPhoto msg = new SendPhoto();
+        }else if (message_text.equals("number emoji")) {
+            SendMessage message = new SendMessage();
+            String number_emoji = EmojiParser.parseToUnicode(":phone: share your number");         
+            message.setChatId(Long.toString(chat_id));
+            message.setText(number_emoji);
+            try {
+                execute(message); // Call method to send the photo
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }else if (message_text.equals("money emoji")) {
+            SendMessage message = new SendMessage();
+            String money_emoji = EmojiParser.parseToUnicode(":moneybag:");
+            message.setChatId(Long.toString(chat_id));
+            message.setText(money_emoji);
+            try {
+                execute(message); // Call method to send the photo
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }else if (message_text.equals("smile emoji")) {
+            SendMessage msg = new SendMessage();
+            String answer = EmojiParser.parseToUnicode(":smile:");
             msg.setChatId(Long.toString(chat_id));
-            msg.setPhoto(new InputFile("AgACAgQAAxkBAAMJYAmoKlHct5sgLGEBd89HFbKWE7wAAsO0MRtXwVBQFSbO7WORtxqugyAnXQADAQADAgADeQADNWkEAAEeBA"));
-            msg.setCaption("Photo");
+            msg.setText(answer);
             try {
                 execute(msg); // Call method to send the photo
             } catch (TelegramApiException e) {
                 e.printStackTrace();
-            }
-        }else if (message_text.equals("Row 2 Button 2")) {
-            SendPhoto msg = new SendPhoto();
-            msg.setChatId(Long.toString(chat_id));
-            msg.setPhoto(new InputFile("AgACAgQAAxkBAAMJYAmoKlHct5sgLGEBd89HFbKWE7wAAsO0MRtXwVBQFSbO7WORtxqugyAnXQADAQADAgADeQADNWkEAAEeBA"));
-            msg.setCaption("Photo");
-            try {
-                execute(msg); // Call method to send the photo
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }else if (message_text.equals("Row 2 Button 3")) {
-            SendPhoto msg = new SendPhoto();
-            msg.setChatId(Long.toString(chat_id));
-            msg.setPhoto(new InputFile("AgACAgQAAxkBAAMJYAmoKlHct5sgLGEBd89HFbKWE7wAAsO0MRtXwVBQFSbO7WORtxqugyAnXQADAQADAgADeQADNWkEAAEeBA"));
-            msg.setCaption("Photo");
-            try {
-                execute(msg); // Call method to send the photo
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-                
+            }        
         }else if (message_text.equals("/hide")) {
             SendMessage msg = new SendMessage();
             msg.setChatId(Long.toString(chat_id));
